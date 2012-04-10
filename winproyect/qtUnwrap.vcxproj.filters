@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="CPU">
+      <UniqueIdentifier>{0db9ea16-7238-4366-ba5c-687d70beb53f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GPU">
+      <UniqueIdentifier>{cbcfcd2c-a460-4dbe-95ae-2f3957e7f389}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common">
+      <UniqueIdentifier>{86b421a7-a16d-4898-b6f2-071523aa1603}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\main.cpp" />
+    <ClCompile Include="..\src\tools.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\QTunwrap.cpp">
+      <Filter>CPU</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Combinacion.cpp">
+      <Filter>CPU</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Transformacion.cpp">
+      <Filter>CPU</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Mapa.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\src\tools.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\QTunwrap.h">
+      <Filter>CPU</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GPUunwrapper.h">
+      <Filter>GPU</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\QT_unwrap_kernel.h">
+      <Filter>GPU</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Combinacion.h">
+      <Filter>CPU</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Transformacion.h">
+      <Filter>CPU</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Mapa.h">
+      <Filter>common</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CudaCompile Include="..\src\GPUunwrapper.cu">
+      <Filter>GPU</Filter>
+    </CudaCompile>
+    <CudaCompile Include="..\src\QT_unwrap_kernel.cu">
+      <Filter>GPU</Filter>
+    </CudaCompile>
+  </ItemGroup>
+</Project>
