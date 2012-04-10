@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<session version="1" name="profile" hscale="1.1386858032697748E-5">
+<executable file="C:\Users\Ayuso\Documents\vstudio10\unwrap\winproyect\Release\qtUnwrap.exe" cwd="C:\Users\Ayuso\Documents\vstudio10\unwrap\winproyect"><envs></envs></executable>
+<expert></expert>
+<analysis><visitedstages></visitedstages></analysis>
+<vruler width="200"/>
+<hruler roiEnable="false"/>
+<timelinestate>
+<timeline pathname="4216" kind="PROCESS" containerstate="OPEN_ALL" filtered="false"/>
+<timeline pathname="4216/4220" kind="THREAD" containerstate="OPEN_ALL" filtered="false"/>
+<timeline pathname="4216/4220/Runtime API" kind="RUNTIME" containerstate="OPEN_ALL" filtered="false"/>
+<timeline pathname="4216/4220/Driver API" kind="DRIVER" containerstate="OPEN_ALL" filtered="false"/>
+<timeline pathname="GeForce GTX 580" kind="DEVICE" containerstate="OPEN_ALL" filtered="false"/>
+<timeline pathname="GeForce GTX 580/1" kind="CONTEXT" containerstate="OPEN_ALL" filtered="false"/>
+<timeline pathname="GeForce GTX 580/1/MemCpy (HtoD)" kind="MEMCPY_HTOD" containerstate="OPEN_ALL" filtered="false"/>
+<timeline pathname="GeForce GTX 580/1/MemCpy (DtoH)" kind="MEMCPY_DTOH" containerstate="OPEN_ALL" filtered="false"/>
+<timeline pathname="GeForce GTX 580/1/Compute" kind="KERNELS" containerstate="OPEN_ALL" filtered="false"/>
+<timeline pathname="GeForce GTX 580/1/Compute/_Z16qt_unwrap_kernelPfiiPc" kind="KERNEL" containerstate="OPEN_ALL" filtered="false"/>
+<timeline pathname="GeForce GTX 580/1/Compute/memset (0)" kind="KERNEL" containerstate="OPEN_ALL" filtered="false"/>
+<timeline pathname="GeForce GTX 580/1/Streams" kind="STREAMS" containerstate="OPEN_ALL" filtered="false"/>
+<timeline pathname="GeForce GTX 580/1/Streams/1" kind="STREAM" containerstate="OPEN_ALL" filtered="false"/>
+</timelinestate>
+<pdm>
+H4sIAAAAAAAAAI3Wy05TURQG4NML0AKVchNB5C6CBSz3AhLRkIKhEgxoCMaAYCWgFqhcBZFgjMZITHwCbiPGTJyR+AAOjD4AIyfOlAZirGd3rQPnXwOVZHPa/l//1d0SujW7plk0ffE1RV8dQf9EeCRY0NHXX1Dv81r1h3L0NThQ3TA1PTgTmgvfmxx8GAyHgo96HoyN9YzooRanL5u+Fnbd6q5WvEfXef2y5KZyw9mV+0h5UWsqOKvJZehrdpvy965Sq9nZTC5fX63FlLfsorOLvpYPlFf5PeDiTK5aXy96Kf8aVwEu3uQc+vKkU+4pQpdgck6VV1D+pRKdQ7pqdjXonMKt1LFrRJcoXRO/vhZ0SSbnUnkb5csRdMniff58RPli+ig4Fzu7dvKex374Bcm/A2XUZ7gzRPf7htFZTU7N7hul+4edVnA2c59efniD8u3H6Owmpz7D7gnKDyfRxZmcev+2w+xm0MULZ+Rbc+gShOte4L6n6BzCbS1RHom3gXMKF0ikPJKELlG4TRflgRR0SbKP84gbXbLsS+O+DHQu4SKZlG9moTsl52bz3Bx0KXJuLs/NQ+eWc/N5biG6VNnHeaAYXZrsK6F8oxRdutxHGe+jHF2GcBsenluJLlP2cR6pQnda9nm5rwZdltxHLe+jHt0ZObeR5/rQZcu5zTz3MrocObeV515Bd1b2cR64ii5XuINr3NeO7pzch5/ygw50eXLudZ7bhS5fzg3w3G50BbKP80APukLZd5P7etEVyX3c4n3cRlcs5/bz3AF0JXLuHZ57F9154boGKTeuhiuVfUPcN4zuguy7z/sIoiuT+xjluWPoyuXcce4bR3dRzg1xXwidR/ZN8D6m0FXIvic8dxpdpdzHLPfNoquSffPct4DuknDri7yPZ+i8ch/LlK+voKuWfZx3raKrkX0vuO8lulq5j1e8j9fo6uTcN5Tv/3SCqxdu/4jytV/oGoTz/aZ8P4quUbg1C30z+myJ4Hxyrp3ytXh0TXKug/sc6JpNTn23ryVR/mnWDa6FnTKxs9HbOeMreY8u6tHk2P+XtndZsXuqQZ0OvPw8bYW1/WS16Zdo9GQZ5ymj0amdnMUsxrLYjr9Idxa+5U+vLn03rmbXzmPUbas6dP3Hczo1OhvEPnVL3l+tealfx7fhYPnD2qHRucSqmfZn//dr8Wt0fotGo8//AB9iVB8BDQAA</pdm>
+</session>

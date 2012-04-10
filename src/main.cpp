@@ -81,7 +81,7 @@ int main (int argc, const char * argv[]){
 	
     /***************   CLEAN UP  *********************/
 	fout.close();
-	getchar();
+	//getchar();
     return 0;
 }
 

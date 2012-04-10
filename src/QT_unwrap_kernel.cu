@@ -1,8 +1,8 @@
 
 typedef  char sum_t[4];
 
-__device__
-int  device_thresshold(float th, float v){
+///////////////////////////////////////////////////////////////
+__device__ int  device_thresshold(float th, float v){
     
     if ((v <= th)&&( v>= -th))
         return 0;
@@ -24,7 +24,7 @@ int  device_thresshold(float th, float v){
     }
 }
 
-
+///////////////////////////////////////////////////////////////
 __device__ class Matrix{
 private:
 	float *_matrix;
@@ -47,7 +47,7 @@ public:
 
 };
 
-
+///////////////////////////////////////////////////////////////
 __device__ void neigbourSum (Matrix &map, int levelWidth, sum_t *sums){
 
 	int thid = threadIdx.x;
@@ -73,42 +73,75 @@ __device__ void neigbourSum (Matrix &map, int levelWidth, sum_t *sums){
 	}
 }
 
+///////////////////////////////////////////////////////////////
 __device__ void computeTransform (sum_t *sums, int levelWidth){
+	int thid = threadIdx.x;
 	int sumsPerFrontier = levelWidth/2;	
 
 	// reduce to one sum per region 
-	if      (levelWidth == 2) { // 256 sums, 1 element
+	if      (levelWidth == 2) { // 256 sums, 1 element each
 
 		// done
 	}
-	else if (levelWidth == 4) { // 64 sums, 2 elements
+	else if (levelWidth == 4) { // 64 sums, 2 elements each
 		if (threadIdx.x < 64*2){
 			//int  threadI
 		}
 	}
-	else if (levelWidth == 8) { // 16 sums, 4 elements
+	else if (levelWidth == 8) { // 16 sums, 4 elements each
 
 	}
-	else if (levelWidth == 16) { // 4 sums, 8 elements
+	else if (levelWidth == 16) { // 4 sums, 8 elements each
 
 	}
-	else if (levelWidth == 32) { // 1 sums, 16 elements
+	else if (levelWidth == 32) { // 1 sums, 16 elements	each
 
 	}
 
-	// three levels scann
+	// ---  three levels inclusive scann  ---
+	//scann the 4 elements of the sum to compute the transform
+	if (levelWidth == 2) { // 256 sums
 
+		// all 256 threads do work
+		sums [thid][0] = sums [thid][0];
+		sums [thid][0] = sums [thid][0] + sums [thid][1];
+		sums [thid][0] = sums [thid][1] + sums [thid][2];
+	}
+	else if (levelWidth == 4) { // 64 sums
+		
+	}
+	else if (levelWidth == 8) { // 16 sums
 
+	}
+	else if (levelWidth == 16) { // 4 sums
+
+	}
+	else if (levelWidth == 32) { // 1 sums
+
+	}
 }
 
-__device__ void regionCorrection(Matrix &map){
+///////////////////////////////////////////////////////////////
+__device__ void regionCorrection(Matrix &map, sum_t *sums, int levelWidth){
 	for (int pass =0; pass < 4; pass ++){
 			int x = (blockDim.x*pass + threadIdx.x) / 32;
 			int y = (blockDim.x*pass + threadIdx.x) % 32;
-			map.getElem(x,y) = blockIdx.x;
+
+			// 4 regions, 
+			int i = (x/(levelWidth/2));
+			int j = (y/(levelWidth/2));
+			
+			int region = j*2 + i;
+
+			i = (x/levelWidth);  // which column to be
+			j = (y/levelWidth); // which row to be
+
+			// TODO: aqui está cascando, arregla estos indices, no estan bien del todo
+		//	map.getElem(x,y) = sums[i + j*(32/levelWidth)][region];
 	}
 }
 
+///////////////////////////////////////////////////////////////
 /// this kernel operates in a Matrix, 
 /// each block process a 32x32 matrix
 /// solves 5 levels of the quad-tree aproach
@@ -128,7 +161,7 @@ __global__ void qt_unwrap_kernel (float *m, int w, int h, char *debug ){
 
 		// --- APPLY TRANSFORMATION FOR EACH REGION ----
 		// 256 threads need 4 passes to cover 32x32 matrix
-		regionCorrection (map);
+		regionCorrection (map, sum, levelWidth);
 
 		__syncthreads();
 	}// tree levels
