@@ -1,0 +1,29 @@
+
+CUDAROOT   := /usr/local/cuda/bin
+CUDASDKDIR := /Developer/GPU\ Computing/C/common
+
+CC := llvm-gcc 
+CUDACC := $(CUDAROOT)/nvcc
+
+CCFLAGS :=
+CUDACCFLAGS := 
+
+SRCROOT := ../src
+
+DEPS = $(SRCROOT)/Combinacion.h\
+	$(SRCROOT)/Mapa.h\
+	$(SRCROOT)/QTunwrap.h\
+	$(SRCROOT)/tools.h\
+	$(SRCROOT)/GPUunwrapper.h\
+	$(SRCROOT)/QT_unwrap_kernel.h\
+	$(SRCROOT)/Transformacion.h
+
+OBJ = Combinacion.o QTunwrap.o main.o \
+	Mapa.o Transformacion.o tools.o 
+
+%.o: %.cpp $(DEPS)
+	$(CUDACC) -c -o $@ $< $(CFLAGS)
+
+unwrap: $(OBJ)
+	$(CUDACC) -o $@ $^ $(CFLAGS)
+
