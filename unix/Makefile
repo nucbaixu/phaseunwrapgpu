@@ -6,7 +6,7 @@ CC := llvm-gcc
 CUDACC := $(CUDAROOT)/nvcc
 
 CCFLAGS :=
-CUDACCFLAGS := 
+CUDACCFLAGS := "--ptxas-options=-v"
 
 SRCROOT := ../src
 BINPATH := ../bin
@@ -23,17 +23,17 @@ OBJ = $(SRCROOT)/Combinacion.o \
 	$(SRCROOT)/Mapa.o \
 	$(SRCROOT)/Transformacion.o  \
 	$(SRCROOT)/tools.o \
-	$(SRCROOT)/GPUunwrapper.cu \
-	$(SRCROOT)/QT_unwrap_kernel.cu
+	$(SRCROOT)/GPUunwrapper.o \
+	$(SRCROOT)/QT_unwrap_kernel.o
 
 %.o: %.cpp $(DEPS)
-	$(CUDACC) -c -o $@ $< $(CFLAGS)
+	@$(CUDACC) -c -o $@ $< $(CFLAGS)
 
 %.o: %.cu $(DEPS)
-	$(CUDACC) -c -o $@ $< $(CFLAGS)
+	@$(CUDACC) -c -o $@ $< $(CUDACCFLAGS)
 
 unwrap: $(OBJ)
-	$(CUDACC) -o $(BINPATH)/$@ $^ $(CFLAGS)
+	@$(CUDACC) -o $(BINPATH)/$@ $^ $(CFLAGS)
 
 clean:
 	@rm $(SRCROOT)/*.o
