@@ -1,4 +1,6 @@
+PROYNAME   := unwrap
 
+#Paths to locate compiler and stuff
 CUDAROOT   := /usr/local/cuda/bin
 CUDASDKDIR := /Developer/GPU\ Computing/C/common
 
@@ -26,14 +28,21 @@ OBJ = $(SRCROOT)/Combinacion.o \
 	$(SRCROOT)/GPUunwrapper.o \
 	$(SRCROOT)/QT_unwrap_kernel.o
 
+###############  rules  #############################
 %.o: %.cpp $(DEPS)
+	@echo "compile " $<
 	@$(CUDACC) -c -o $@ $< $(CFLAGS)
 
 %.o: %.cu $(DEPS)
 	@$(CUDACC) -c -o $@ $< $(CUDACCFLAGS)
 
 unwrap: $(OBJ)
-	@$(CUDACC) -o $(BINPATH)/$@ $^ $(CFLAGS)
+	@$(CUDACC) -o $(BINPATH)/release/$(PROYNAME) $^ $(CFLAGS)
+
+debug: CFLAGS += -DDEBUG -g
+debug: CUDACCFLAGS += -DDEBUG -g
+debug: $(OBJ)
+	@$(CUDACC) -o $(BINPATH)/debug/$(PROYNAME) $^ $(CFLAGS)
 
 clean:
-	@rm $(SRCROOT)/*.o
+	@rm -f $(OBJ)
