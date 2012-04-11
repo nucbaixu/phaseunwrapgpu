@@ -18,14 +18,16 @@
 
 using namespace std;
 
+////////////////////////////////////////////////////////////////////////////////
+//
 void doHOSTquadtreeUnwrap (Mapa &wrap){
 
     // do QUAD-TREE unwrap
     for (int ancho=2; ancho <= wrap.getW(); ancho<<=1){
         
-     //   cout << "====================================================" << endl;
-     //   cout << "         ANCHO:   " << ancho << endl;
-     //   cout << "====================================================" << endl;
+     //   cout <<"====================================================" << endl;
+     //   cout <<"         ANCHO:   " << ancho << endl;
+     //   cout <<"====================================================" << endl;
         
         for(int i= 0; i < wrap.getW(); i+=ancho){
             for (int j=0; j < wrap.getH(); j+=ancho){
@@ -33,25 +35,27 @@ void doHOSTquadtreeUnwrap (Mapa &wrap){
                 //cout << "unwrap [" << i << "," << j <<"]x" << ancho << endl;
             }
         }
-      //  cout << "============= process MATRIX =========================" << endl;
-      //  cout << wrap;
-      //  cout << "====================================================" << endl;
+      //  cout <<"============= process MATRIX =======================" << endl;
+      //  cout <<wrap;
+      //  cout <<"====================================================" << endl;
     }
 }
 
+////////////////////////////////////////////////////////////////////////////////
+//
 void doGPUquadtreeUnwrap (Mapa &wrap){
 	
 	GPUunwrapper unwrapper(wrap.getPointer(), wrap.getW(),wrap.getH());
 	unwrapper.doUnwrap();
 }
 
-
+////////////////////////////////////////////////////////////////////////////////
+//
 int main (int argc, const char * argv[]){  
 
-	
 	fstream fout;
-	fout.open("matrices.log",ios_base::out );
-	cout.rdbuf(fout.rdbuf());
+	fout.open("matrices.txt",ios_base::out );
+	//cout.rdbuf(fout.rdbuf());    // somehow this crash in mac
     
     /***************   MAPAS *****************/
     Mapa mapaORG(32,32);  // generate a default map
@@ -59,14 +63,17 @@ int main (int argc, const char * argv[]){
     wrap1.doWrap();
     Mapa wrap2(wrap1);
 
-    cout << "size:[" << mapaORG.getW() << "," << mapaORG.getH() << "] [" << wrap1.getW() << "," << wrap1.getH() <<"]" << endl;	
- //   cout << "============= original map=====================" << endl;
- //   cout << mapaORG;
-    cout << "============= wrap ============================" << endl;
-    cout << wrap1;
+    cout << "size:[" << mapaORG.getW() << "," << mapaORG.getH() 
+	 << "] [" << wrap1.getW() << "," << wrap1.getH() <<"]" << endl;	
+    fout << "============= original map=====================" << endl;
+    fout << mapaORG;
+    fout << "============= wrap ============================" << endl;
+    fout << wrap1;
 
 	doHOSTquadtreeUnwrap (wrap1);
 	doGPUquadtreeUnwrap  (wrap2);
+
+	fout << endl;
 
 	fout << "============= GPU wrap ============================" << endl;
 	fout << wrap2;
@@ -77,7 +84,6 @@ int main (int argc, const char * argv[]){
         cout << "everything all right" << endl;
     else 
         cout << "error between maps: "<< error << endl;        
-
 	
     /***************   CLEAN UP  *********************/
 	fout.close();

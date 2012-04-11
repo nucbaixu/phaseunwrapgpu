@@ -17,13 +17,10 @@ transformacion_t getScanTransform (suma_t s){
     // cuadrante 00 fijo
     // cuadrante 01 depende de suma en s[0]
     t[0] = s[0];
-
     // cuadrante 11 depende de suma en s[1]
     t[2] = t[0] + s[1];
-    
     // cuadrante 10 depende de suma en s[2] y valor en 11
     t[1] = t[2] + s[2];
-    
     
     return t;
 }
@@ -33,10 +30,10 @@ void qtUnwrap(Mapa &m, int i, int j, int ancho){
     suma_t suma;
     
     if (ancho == 2){
-        suma = suma_t(thresshold(0.5, m.getElem(i  , j  ) -  m.getElem((i  ), (j+1))), 
-                       thresshold(0.5, m.getElem(i  , j+1) -  m.getElem((i+1), (j+1))), 
-                       thresshold(0.5, m.getElem(i+1, j+1) -  m.getElem((i+1), (j))), 
-                       thresshold(0.5, m.getElem(i+1, j  ) -  m.getElem((i  ), (j))));
+        suma = suma_t(thresshold(0.5,m.getElem(i  ,j  )-m.getElem((i  ),(j+1))),
+                      thresshold(0.5,m.getElem(i  ,j+1)-m.getElem((i+1),(j+1))),
+                      thresshold(0.5,m.getElem(i+1,j+1)-m.getElem((i+1),(j  ))),
+                      thresshold(0.5,m.getElem(i+1,j  )-m.getElem((i  ),(j ))));
         
         transformacion_t t = getScanTransform (suma);
         
@@ -55,22 +52,25 @@ void qtUnwrap(Mapa &m, int i, int j, int ancho){
         int *cuatroTres= (int*)malloc (medio*sizeof(int));
         int *tresUno   = (int*)malloc (medio*sizeof(int));
         
-        
         // define las fronteras
         int f1 = medio-1;
         int f2  = medio;
         
         for (int e =0; e <medio; e++){
-            unoDos[e]     =  thresshold(0.5, m.getElem(i+e  , j+f1) -  m.getElem(i+e, j+f2));
+            unoDos[e]    =thresshold(0.5,m.getElem(i+e ,j+f1)-
+														   m.getElem(i+e,j+f2));
         }
         for (int e =0; e <medio; e++){
-            dosCuatro[e]  =  thresshold(0.5, m.getElem(i+f1  , j+f2+e) -  m.getElem(i+f2, j+f2+e));
+            dosCuatro[e] =thresshold(0.5,m.getElem(i+f1,j+f2+e)-
+													    m.getElem(i+f2,j+f2+e));
         }
         for (int e =0; e <medio; e++){
-            cuatroTres[e] =  thresshold(0.5, m.getElem(i+f2+e, j+f2) -  m.getElem(i+f2+e, j+f1));
+            cuatroTres[e]=thresshold(0.5, m.getElem(i+f2+e,j+f2)-
+													    m.getElem(i+f2+e,j+f1));
         }
         for (int e =0; e <medio; e++){
-            tresUno[e]    =  thresshold(0.5, m.getElem(i+f2  , j+e) -  m.getElem(i+f1, j+e));
+            tresUno[e]   =thresshold(0.5, m.getElem(i+f2 ,j+e)-
+													      m.getElem(i+f1, j+e));
         }
         
         suma.setZero();
@@ -87,7 +87,8 @@ void qtUnwrap(Mapa &m, int i, int j, int ancho){
         
 		transformacion_t t = getScanTransform(suma);
         
-        //cout << "for [" << i << "," << j << "] sum: " << suma << " t: " << t << endl;
+        cout << "for [" << i << "," << j << "] sum: " << 
+				suma << " t: " << t << endl;
         
         //        aplicar transformación:
         

@@ -64,7 +64,11 @@ bool GPUunwrapper::doUnwrap(){
 	// TODO: me he quedado aqui!
 	std::cout << "SUMS: ";
 	for (int i=0; i< 256*4; i+=4){
-		std::cout << "[" << (int)h_debug[i] <<"," << (int)h_debug[i+1] <<"," << (int)h_debug[i+2] <<"," << (int)h_debug[i+3] << "]" << std::endl;
+		std::cout << i << 
+			": [" << (int)h_debug[i]   <<"," << 
+				   (int)h_debug[i+1] <<"," << 
+                   (int)h_debug[i+2] <<"," << 
+	 			   (int)h_debug[i+3] << "]" << std::endl;
 	}
 	
 	cudaFree (d_map);

@@ -127,17 +127,15 @@ __device__ void regionCorrection(Matrix &map, sum_t *sums, int levelWidth){
 			int x = (blockDim.x*pass + threadIdx.x) / 32;
 			int y = (blockDim.x*pass + threadIdx.x) % 32;
 
-			// 4 regions, 
-			int i = (x/(levelWidth/2));
-			int j = (y/(levelWidth/2));
-			
-			int region = j*2 + i;
+			int i = (x/levelWidth);  // which column to be
+			int j = (y/levelWidth); // which row to be
 
-			i = (x/levelWidth);  // which column to be
-			j = (y/levelWidth); // which row to be
+			int sector = i*(32/levelWidth) + j;
+			int a = x - (i*levelWidth);
+			int b = y - (j*levelWidth);
+			int region = a*(levelWidth) + b;
 
-			// TODO: aqui está cascando, arregla estos indices, no estan bien del todo
-		//	map.getElem(x,y) = sums[i + j*(32/levelWidth)][region];
+		 	map.getElem(x,y) = sums[sector][region];
 	}
 }
 
